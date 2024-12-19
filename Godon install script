@@ -1,0 +1,42 @@
+#!/bin/bash
+# Maak een map voor Godot
+mkdir -p ~/Godot
+cd ~/Godot
+
+# Download Godot
+wget https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip
+
+# Controleer of de download succesvol was
+if [ -f "Godot_v4.0-stable_linux.x86_64.zip" ]; then
+    echo "Download succesvol. Bestand gevonden."
+else
+    echo "Download mislukt. Controleer de URL of je netwerkverbinding."
+    exit 1
+fi
+
+# Pak het bestand uit
+unzip Godot_v4.0-stable_linux.x86_64.zip
+
+# Controleer of het uitpakken succesvol was
+if [ -f "Godot_v4.0-stable_linux.x86_64" ]; then
+    echo "Uitpakken succesvol."
+else
+    echo "Uitpakken mislukt. Controleer of het zipbestand correct is."
+    exit 1
+fi
+
+# Verwijder het zipbestand na succesvolle installatie
+rm -f Godot_v4.0-stable_linux.x86_64.zip
+echo "Installatiebestand verwijderd."
+
+# Maak een snelkoppeling op het bureaublad
+echo "[Desktop Entry]
+Name=Godot
+Exec=~/Godot/Godot_v4.0-stable_linux.x86_64
+Type=Application
+Terminal=false" > ~/Desktop/Godot.desktop
+
+# Maak de snelkoppeling uitvoerbaar
+chmod +x ~/Desktop/Godot.desktop
+
+echo "Godot is succesvol geïnstalleerd en een snelkoppeling is aangemaakt op het bureaublad."
